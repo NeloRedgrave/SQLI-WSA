@@ -5,10 +5,23 @@ Ketika aplikasi rentan terhadap SQL Injection, dan hasil dari query adalah respo
 >     SELECT a, b FROM table1 UNION SELECT c, d FROM table2
  SQL Query ini memberi 1 hasil dengan 2 kolom.<br> Berisi Kolom _a_ & _b_ pada _table1_ dan kolom _c_ & _d_ pada _table2_ 
 
-agar ***UNION*** Query bekerja, 2 kunci utama harus terpenuhi: <br>
-***1. Queri Individu harus memberikan jumlah kolom yang sama*** <br>
-***2. Tipe data pada tiap kolom harus kompatible diantara queri individu***
+agar ***UNION*** Query bekerja, 2 kunci utama harus terpenuhi: <br> <br>
+_1. Queri Individu harus memberikan jumlah kolom yang sama_ <br>
+_2. Tipe data pada tiap kolom harus kompatible diantara queri individu_
 
+Untuk melakukan SQLi UNION Attack, Pastikan kamu memenuhi 2 keperluan ini. Normalnya ini bertujuan untuk mengetahui: <br> <br>
+_1. Berapa kolom yang muncul dari query original_ <br>
+_2. Manakah kolom yang muncul dari query original yang cocok dengan tipe data untuk menahan hasil dari query yang di inject_
+
+## **MATERI : Determining the number of columns required**
+Ketika kamu melakukan SQLi UNION Attack, ada 2 metode efektif untuk menentukan berapa banyak kolom yang muncul dari query original.
+Salah satu metodenya melibatkan seri dari klausa _ORDER BY_ dan menambah kolom index yang spesifik hingga error terjadi. Contohnya, jika inject point adalah quoted string didalam klausa _WHERE_ dari query original, kamu harus menyertakan :
+>
+>
+     ' ORDER BY 1--
+     ' ORDER BY 2--
+     ' ORDER BY 3--
+     dst.
 ## **LAB : SQL injection UNION attack, retrieving multiple values in a single column**
 
 1. Gunakan BURP SUITE untuk Intercept dan modifikasi request yang menyusun kategori produk filter
